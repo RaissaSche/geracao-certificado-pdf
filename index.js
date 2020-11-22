@@ -1,10 +1,12 @@
 const express = require("express");
-const app = express();
+const bodyParser = require("body-parser");
 const port = 3000;
-app.use(express.static("public"));
 const handlebars = require("express-handlebars");
 
+const app = express();
 app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set("view engine", "hbs");
 app.engine(
@@ -24,6 +26,11 @@ apiFalsa = () => {
     },
   };
 };
+
+app.post("/certificado", (req, res) => {
+  console.log(req.body);
+  res.sendStatus(200);
+});
 
 app.get("/", (req, res) => {
   //Serve o body da página
