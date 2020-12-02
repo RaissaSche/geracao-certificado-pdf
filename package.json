@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Serviço Web para geração de certificados de conclusão de curso ",
   "main": "index.js",
+  "engines": {
+    "node": "14.8.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
