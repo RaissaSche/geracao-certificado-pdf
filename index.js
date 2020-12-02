@@ -3,8 +3,6 @@ const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
 const puppeteer = require("puppeteer");
 
-const port = 3000;
-
 const app = express();
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -47,7 +45,7 @@ app.post("/certificado", (req, res) => {
   );
 });
 
-app.listen(port || process.env.PORT, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log(`App na porta ${port}`);
 });
 
