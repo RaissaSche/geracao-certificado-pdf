@@ -1,8 +1,13 @@
 <!-- As informações dinâmicas: nome do curso, data e nome do aluno -->
 {{#if dadosExistem}}
 {{#each dados}}
-<p>{{nomeCurso}}</p>
-<p>{{data}}</p>
-<p>{{nomeAluno}}</p>
+<div class="dados">
+    <p class="textoMenor">Orgulhosamente anunciamos que</p>
+    <p>{{nomeAluno}}</p>
+    <p class="textoMenor"> formou com honra em </p>
+    <p>{{nomeCurso}}</p>
+    <p class="textoMenor"> na ilustre data de </p>
+    <p>{{data}}</p>
+</div>
 {{/each}}
 {{/if}}

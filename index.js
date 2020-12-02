@@ -1,7 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const port = 3000;
 const handlebars = require("express-handlebars");
+const puppeteer = require("puppeteer");
+
+const port = 3000;
 
 const app = express();
 app.use(express.static("public"));
@@ -9,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.set("view engine", "hbs");
+
 app.engine(
   "hbs",
   handlebars({
@@ -17,31 +20,43 @@ app.engine(
   })
 );
 
-apiFalsa = () => {
+configuraDados = (dados) => {
   return {
     dados: {
-      nomeCurso: "Javascript",
-      data: "20 de Outubro de 2020",
-      nomeAluno: "Raissa Scheeren",
+      nomeCurso: dados.courseName,
+      data: dados.date,
+      nomeAluno: dados.studentName,
     },
   };
 };
 
 app.post("/certificado", (req, res) => {
   console.log(req.body);
-  res.sendStatus(200);
-});
-
-app.get("/", (req, res) => {
-  //Serve o body da página
-  //res.render (‘main’, {layout: ‘index’, key1: val1, key2: val2… keyn: valn});
-  res.render("main", {
-    layout: "index",
-    dados: apiFalsa(),
-    dadosExistem: true,
-  });
+  res.render(
+    "main",
+    {
+      layout: "index",
+      dados: configuraDados(req.body.data),
+      dadosExistem: true,
+    },
+    function (err, html) {
+      console.log(html);
+      createPDF(html);
+      res.send("PDF gerado na pasta do projeto!");
+    }
+  );
 });
 
 app.listen(port, function () {
   console.log(`App na porta ${port}`);
 });
+
+async function createPDF(data) {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.setContent(data);
+
+  await page.pdf({ path: "certificado.pdf" });
+  console.log("PDF gerado na pasta do projeto!");
+  await browser.close();
+}
