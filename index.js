@@ -47,7 +47,7 @@ app.post("/certificado", (req, res) => {
   );
 });
 
-app.listen(port, function () {
+app.listen(port || process.env.PORT, function () {
   console.log(`App na porta ${port}`);
 });
 
