@@ -12,8 +12,8 @@ Use o postman (ou similar) para executa um POST em https://gerador-certificado-p
  "studentName": "Raissa Scheeren"  
  }  
 }.  
-(Também há um exemplo em imagem no repositório).  
-Para fazer download pleo browser, faça F5 e o pop-up de download será aberto.
+Faça o download da response pelo Postman.
+(Há um exemplo em imagem na pasta "exemplo de uso pelo Postman" no repositório).
 
 ## Pra rodar localmente
 
@@ -28,5 +28,5 @@ Use o postman (ou similar) para executa um POST em localhost:3000/certificado co
  }  
 }.  
 (Também há um exemplo em imagem no repositório).  
-O PDF será criado na pasta do projeto.
+O PDF será criado na pasta /tmp do projeto.
 Para fazer download pleo browser, faça F5 e o pop-up de download será aberto.

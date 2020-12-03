@@ -49,27 +49,6 @@ app.post("/certificado", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  /*let dados = {
-    courseName: "Jogos Digitais",
-    date: "Outubro de 2020",
-    studentName: "Raissa Scheeren",
-  };
-
-  res.render(
-    "main",
-    {
-      layout: "index",
-      dados: configuraDados(dados),
-      dadosExistem: true,
-    },
-    function (err, html) {
-      console.log(html);
-      createPDF(html);
-      var data = fs.readFileSync("./tmp/certificado.pdf");
-      res.contentType("application/pdf");
-      res.send(data);
-    }
-  );*/
   res.download("./tmp/certificado.pdf");
 });
 
