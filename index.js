@@ -80,7 +80,7 @@ app.listen(port, host, function () {
 });
 
 async function createPDF(data) {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({ args: ["--no-sandbox"] });
   const page = await browser.newPage();
   await page.setContent(data);
 
