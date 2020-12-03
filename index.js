@@ -38,10 +38,10 @@ app.post("/certificado", (req, res) => {
       dados: configuraDados(req.body.data),
       dadosExistem: true,
     },
-    function (err, html) {
+    async function (err, html) {
       console.log(html);
-      createPDF(html);
-      var data = fs.readFileSync("./certificado.pdf");
+      await createPDF(html);
+      var data = fs.readFileSync("./tmp/certificado.pdf");
       res.contentType("application/pdf");
       res.send(data);
     }
@@ -65,12 +65,12 @@ app.get("/", (req, res) => {
     function (err, html) {
       console.log(html);
       createPDF(html);
-      var data = fs.readFileSync("./certificado.pdf");
+      var data = fs.readFileSync("./tmp/certificado.pdf");
       res.contentType("application/pdf");
       res.send(data);
     }
   );*/
-  res.download("./certificado.pdf");
+  res.download("./tmp/certificado.pdf");
 });
 
 const host = "0.0.0.0";
@@ -84,7 +84,7 @@ async function createPDF(data) {
   const page = await browser.newPage();
   await page.setContent(data);
 
-  await page.pdf({ path: "certificado.pdf" });
+  await page.pdf({ path: "./tmp/certificado.pdf" });
   console.log("PDF gerado na pasta do projeto!");
   await browser.close();
 }
