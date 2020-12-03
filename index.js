@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const handlebars = require("express-handlebars");
 const puppeteer = require("puppeteer");
+const fs = require("fs");
 
 const app = express();
 app.use(express.static("public"));
@@ -40,12 +41,39 @@ app.post("/certificado", (req, res) => {
     function (err, html) {
       console.log(html);
       createPDF(html);
-      res.send("PDF gerado na pasta do projeto!");
+      var data = fs.readFileSync("./certificado.pdf");
+      res.contentType("application/pdf");
+      res.send(data);
     }
   );
 });
 
-const host = '0.0.0.0';
+app.get("/", (req, res) => {
+  /*let dados = {
+    courseName: "Jogos Digitais",
+    date: "Outubro de 2020",
+    studentName: "Raissa Scheeren",
+  };
+
+  res.render(
+    "main",
+    {
+      layout: "index",
+      dados: configuraDados(dados),
+      dadosExistem: true,
+    },
+    function (err, html) {
+      console.log(html);
+      createPDF(html);
+      var data = fs.readFileSync("./certificado.pdf");
+      res.contentType("application/pdf");
+      res.send(data);
+    }
+  );*/
+  res.download("./certificado.pdf");
+});
+
+const host = "0.0.0.0";
 const port = process.env.PORT || 3000;
 app.listen(port, host, function () {
   console.log(`App na porta ${port}`);
