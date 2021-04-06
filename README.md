@@ -33,4 +33,4 @@ Use o postman (ou similar) para executa um POST em localhost:3000/certificado co
 ```
 (Também há um exemplo em imagem no repositório).  
 O PDF será criado na pasta /tmp do projeto.  
-Para fazer download pleo browser, faça F5 e o pop-up de download será aberto.  
+Para fazer download pelo browser, faça F5 e o pop-up de download será aberto.  
